@@ -15,6 +15,11 @@ services:
     expose:
       - "27017"
 
+  mqtt:
+    build: ./mqtt
+    ports:
+      - "1883:1883"
+
 secrets:
   parse_server_application_id:
     file: ./secrets/PARSE_SERVER_APPLICATION_ID
