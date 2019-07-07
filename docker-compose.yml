@@ -1,0 +1,20 @@
+version: "3.7"
+services:
+  parse:
+    build: ./parse
+    depends_on:
+      - parse-db
+    secrets:
+      - parse_app_id
+      - parse_master_key
+
+  parse-db:
+    image: mongo
+    expose:
+      - "27017"
+
+secrets:
+  parse_app_id:
+    file: ./secrets/PARSE_APP_ID
+  parse_master_key:
+    file: ./secrets/PARSE_MASTER_KEY
