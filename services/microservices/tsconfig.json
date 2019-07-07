@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "*": ["types/*"]
+    },
+    "module": "commonjs",
+    "target": "es2018",
+    "strictPropertyInitialization": false,
+    "lib": ["dom", "es7"],
+    "sourceMap": true,
+    "strict": true,
+    "inlineSources": true,
+    "importHelpers": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "typeRoots": ["./node_modules/@types", "./types"]
+  }
+}
