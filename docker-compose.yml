@@ -5,8 +5,10 @@ services:
     depends_on:
       - parse-db
     secrets:
-      - parse_app_id
-      - parse_master_key
+      - parse_server_application_id
+      - parse_server_master_key
+    ports:
+      - "1337:1337"
 
   parse-db:
     image: mongo
@@ -14,7 +16,7 @@ services:
       - "27017"
 
 secrets:
-  parse_app_id:
-    file: ./secrets/PARSE_APP_ID
-  parse_master_key:
-    file: ./secrets/PARSE_MASTER_KEY
+  parse_server_application_id:
+    file: ./secrets/PARSE_SERVER_APPLICATION_ID
+  parse_server_master_key:
+    file: ./secrets/PARSE_SERVER_MASTER_KEY
