@@ -2,8 +2,12 @@
   "name": "microservices",
   "version": "0.0.1",
   "description": "microservices in support of 'iot-demo' project",
-  "dependencies": {},
+  "dependencies": {
+    "parse": "^2.4.0"
+  },
   "devDependencies": {
+    "@types/parse": "^2.2.6",
+    "prettier": "^1.18.2",
     "ts-node": "^8.3.0",
     "tslint": "^5.18.0",
     "tslint-config-prettier": "^1.18.0",
