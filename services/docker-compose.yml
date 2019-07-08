@@ -20,6 +20,14 @@ services:
     ports:
       - "1883:1883"
 
+  microservices:
+    build: ./microservices
+    volumes:
+      - ./microservices:/usr/share/microservices
+    secrets:
+      - parse_server_application_id
+      - parse_server_master_key
+
 secrets:
   parse_server_application_id:
     file: ./secrets/PARSE_SERVER_APPLICATION_ID
