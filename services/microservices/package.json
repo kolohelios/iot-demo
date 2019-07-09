@@ -3,10 +3,13 @@
   "version": "0.0.1",
   "description": "microservices in support of 'iot-demo' project",
   "dependencies": {
-    "parse": "^2.4.0"
+    "mqtt": "^3.0.0",
+    "parse": "^2.4.0",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "@types/parse": "^2.2.6",
+    "@types/uuid": "^3.4.5",
     "prettier": "^1.18.2",
     "ts-node": "^8.3.0",
     "tslint": "^5.18.0",
