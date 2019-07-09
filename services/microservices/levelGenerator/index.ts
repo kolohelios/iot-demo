@@ -2,7 +2,7 @@ import { readFile } from 'fs'
 import * as mqtt from 'mqtt'
 import * as Parse from 'parse/node'
 import { promisify } from 'util'
-import * as uuidv1 from 'uuid/v1'
+import * as uuidV1 from 'uuid/v1'
 
 const readFileAsync = promisify(readFile)
 
@@ -31,10 +31,11 @@ const connect = async (): Promise<void> => {
 
   if (!levels.length) {
     const newLevels = []
-    for (let i = 0; i < 3; i++) {
+    const numberOfLevelsToCreate = 3
+    for (let i = 0; i < numberOfLevelsToCreate; i++) {
       // TODO add type for levels and use it here
       const newLevel: any = new Parse.Object('level')
-      newLevel.set('levelId', uuidv1())
+      newLevel.set('levelId', uuidV1())
       newLevels.push(newLevel)
     }
 
@@ -45,6 +46,7 @@ const connect = async (): Promise<void> => {
     return level.get('levelId')
   })
 
+  const intervalInMilliseconds = 2000
   setInterval(() => {
     levelIdArray.forEach((levelId) => {
       client.publish(
@@ -52,8 +54,8 @@ const connect = async (): Promise<void> => {
         Math.floor(Math.random() * 100).toString()
       )
     })
-  }, 2 * 1000)
+  }, intervalInMilliseconds)
 }
 
 // TODO handle the error if it's a missing secret by throwing a meaningful error
-connect().catch(console.error)
+connect().catch((error) => { throw new Error(error) })

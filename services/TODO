@@ -1,0 +1,3 @@
+- [ ] change domain of data to something more interesting and relatable
+- [ ] add common directory at root for shared models
+- [ ] lock down MQTT access
