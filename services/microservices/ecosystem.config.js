@@ -10,5 +10,15 @@ module.exports = {
       },
       autorestart: false,
     },
+    {
+      name: 'averager',
+      script: './node_modules/.bin/ts-node',
+      args: './averager/index.ts',
+      watch: ['./averager/**/*'],
+      env: {
+        NODE_ENV: 'development',
+      },
+      autorestart: false,
+    },
   ],
 }

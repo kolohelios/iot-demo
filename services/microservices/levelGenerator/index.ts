@@ -7,7 +7,10 @@ import * as uuidV1 from 'uuid/v1'
 const readFileAsync = promisify(readFile)
 
 const connect = async (): Promise<void> => {
-  const client = mqtt.connect('mqtt://services_mqtt_1', { port: 1883 })
+  const client = mqtt.connect('mqtt://services_mqtt_1', {
+    port: 1883,
+    clientId: 'levelGenerator',
+  })
   await new Promise((fulfilled) => {
     client.on('connect', fulfilled)
   })
@@ -58,4 +61,6 @@ const connect = async (): Promise<void> => {
 }
 
 // TODO handle the error if it's a missing secret by throwing a meaningful error
-connect().catch((error) => { throw new Error(error) })
+connect().catch((error) => {
+  throw new Error(error)
+})
