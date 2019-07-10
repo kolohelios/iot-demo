@@ -1,10 +1,7 @@
-import { readFile } from 'fs'
 import * as mqtt from 'mqtt'
 import * as Parse from 'parse/node'
-import { promisify } from 'util'
 import * as uuidV1 from 'uuid/v1'
-
-const readFileAsync = promisify(readFile)
+import { applicationIDSecret, masterKey } from '../common/secrets'
 
 const connect = async (): Promise<void> => {
   const client = mqtt.connect('mqtt://services_mqtt_1', {
@@ -14,17 +11,8 @@ const connect = async (): Promise<void> => {
   await new Promise((fulfilled) => {
     client.on('connect', fulfilled)
   })
-  const applicationIDSecret = (await readFileAsync(
-    '/run/secrets/parse_server_application_id'
-  ))
-    .toString()
-    .replace('\n', '')
-  const masterKey = (await readFileAsync(
-    '/run/secrets/parse_server_master_key'
-  ))
-    .toString()
-    .replace('\n', '')
-  Parse.initialize(applicationIDSecret, masterKey)
+
+  Parse.initialize(await applicationIDSecret(), await masterKey())
   ;(Parse as any).serverURL = 'http://services_parse_1:1337/parse'
 
   const Levels = Parse.Object.extend('level')

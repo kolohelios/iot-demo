@@ -1,9 +1,6 @@
-import { readFile } from 'fs'
 import * as mqtt from 'mqtt'
 import * as Parse from 'parse/node'
-import { promisify } from 'util'
-
-const readFileAsync = promisify(readFile)
+import { applicationIDSecret, masterKey } from '../common/secrets'
 
 interface ILevelsData {
   levels: number[]
@@ -22,17 +19,7 @@ const run = async (): Promise<void> => {
   // ERRATA we have to be careful about the placement of the "client.on('connect', ...)" call, because we may not hear the event if it's after something awaited
   await new Promise((fulfilled) => client.on('connect', () => fulfilled()))
 
-  const applicationIDSecret = (await readFileAsync(
-    '/run/secrets/parse_server_application_id'
-  ))
-    .toString()
-    .replace('\n', '')
-  const masterKey = (await readFileAsync(
-    '/run/secrets/parse_server_master_key'
-  ))
-    .toString()
-    .replace('\n', '')
-  Parse.initialize(applicationIDSecret, masterKey)
+  Parse.initialize(await applicationIDSecret(), await masterKey())
   ;(Parse as any).serverURL = 'http://services_parse_1:1337/parse'
 
   const levelsDataDictionary: ILevelsDataDictionary = {}
