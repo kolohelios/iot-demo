@@ -19,3 +19,15 @@ export const masterKey = async () => {
 
   return fetchSecret(secretPath)
 }
+
+export const databasePassword = async () => {
+  const secretPath = '/run/secrets/microservices_database_password'
+
+  return fetchSecret(secretPath)
+}
+
+export const databaseName = async () => {
+  const secretPath = '/run/secrets/microservices_database_name'
+
+  return fetchSecret(secretPath)
+}
