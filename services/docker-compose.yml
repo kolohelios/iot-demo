@@ -7,8 +7,8 @@ services:
     secrets:
       - parse_server_application_id
       - parse_server_master_key
-    ports:
-      - "1337:1337"
+    expose:
+      - "1337"
 
   parse-db:
     image: mongo
@@ -17,13 +17,15 @@ services:
 
   mqtt:
     build: ./mqtt
-    ports:
-      - "1883:1883"
+    expose:
+      - "1883"
 
   microservices:
     build: ./microservices
-    volumes:
-      - ./microservices:/usr/share/microservices
+    depends_on:
+      - parse
+      - mqtt
+      - microservices-db
     secrets:
       - parse_server_application_id
       - parse_server_master_key
@@ -35,11 +37,10 @@ services:
       - MYSQL_DATABASE_FILE=/run/secrets/microservices_database_name
     expose:
       - "3306"
+    restart: always
     secrets:
       - microservices_database_password
       - microservices_database_name
-    volumes:
-      - ./mariadb_data:/var/lib/mysql
 
 secrets:
   parse_server_application_id:

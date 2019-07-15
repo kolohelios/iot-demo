@@ -2,7 +2,13 @@
 
 ## Running
 
-From the root project folder, execute `docker-compose build` and then `docker-compose run`. Add a `-d` switch if you want to run in daemon (background) mode.
+### Development
+
+From the root project folder, run `docker-compose -f docker-compose.yml -f dev.docker-compose.yml build` and then `docker-compose -f docker-compose.yml -f dev.docker-compose.yml up`. Add a `-d` switch if you want to run in daemon (background) mode.
+
+### Production
+
+From the root project folder, run `docker-compose build` and then `docker-compose up -d`.
 
 ## Differences between development and production environments
 

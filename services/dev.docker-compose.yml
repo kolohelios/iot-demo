@@ -1,0 +1,23 @@
+version: "3.7"
+
+services:
+  parse:
+    ports:
+      - "1337:1337"
+
+  parse-db:
+    ports:
+      - "27017:27017"
+
+  mqtt:
+    ports:
+      - "1883:1883"
+
+  microservices:
+    build:
+      context: ./microservices
+      dockerfile: dev.Dockerfile
+
+  microservices-db:
+    ports:
+      - "3306:3306"

@@ -2,23 +2,19 @@ module.exports = {
   apps: [
     {
       name: 'levelGenerator',
-      script: './node_modules/.bin/ts-node',
-      args: './levelGenerator/index.ts',
-      watch: ['./levelGenerator/**/*'],
+      script: './build/levelGenerator.js',
       env: {
-        NODE_ENV: 'development',
+        NODE_ENV: 'production',
       },
-      autorestart: false,
+      exec_mode: 'cluster',
     },
     {
       name: 'averager',
-      script: './node_modules/.bin/ts-node',
-      args: './averager/index.ts',
-      watch: ['./averager/**/*'],
+      script: './build/averager.js',
       env: {
-        NODE_ENV: 'development',
+        NODE_ENV: 'production',
       },
-      autorestart: false,
+      exec_mode: 'cluster',
     },
   ],
 }
